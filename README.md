@@ -32,6 +32,7 @@
 
 ## 📂 Folder Structure
 
+```bash
 ├── app/ # App router layout & pages
 ├── components/ # UI and layout components
 │ └── ui/ # ShadCN UI components
