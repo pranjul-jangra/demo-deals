@@ -50,9 +50,6 @@ export default function Header() {
             <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors">
               Products
             </Link>
-            <Link href="/categories" className="text-sm font-medium hover:text-primary transition-colors">
-              Categories
-            </Link>
           </nav>
 
           {/* Search Bar */}

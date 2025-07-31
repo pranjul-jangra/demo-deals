@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useParams } from "next/navigation"
 import ProductCard from "@/components/product-card"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -17,10 +18,12 @@ interface Product {
   }
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
+export default function CategoryPage() {
+  const params = useParams()
+  const category = params.category as string
+
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const category = decodeURIComponent(params.category)
 
   useEffect(() => {
     async function fetchProducts() {

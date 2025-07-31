@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 import { Star, ShoppingCart, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -23,17 +24,21 @@ interface Product {
   }
 }
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage() {
+  const params = useParams();
+  const id = params.id as string;
+
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [loading, setLoading] = useState(true)
   const { addToCart } = useCart()
   const { toast } = useToast()
 
+
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const res = await fetch(`https://fakestoreapi.com/products/${params.id}`)
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`)
         const data = await res.json()
         setProduct(data)
       } catch (error) {
@@ -44,7 +49,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     }
 
     fetchProduct()
-  }, [params.id])
+  }, [id])
 
   const handleAddToCart = () => {
     if (product) {
@@ -55,10 +60,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         image: product.image,
         quantity,
       })
-      toast({
-        title: "Added to cart",
-        description: `${quantity} x ${product.title} added to your cart.`,
-      })
+      toast(
+        <div>
+          <h1 className="font-bold">Added to cart</h1>
+          <p>{`${quantity} x ${product.title} added to your cart.`}</p>
+        </div>
+      )
     }
   }
 

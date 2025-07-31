@@ -61,10 +61,12 @@ export default function RegisterPage() {
       })
 
       if (response.ok) {
-        toast({
-          title: "Account created successfully!",
-          description: "You can now log in with your credentials.",
-        })
+        toast(
+          <div>
+            <h1 className="font-bold">Account created successfully!</h1>
+            <p>You can now log in with your credentials.</p>
+          </div>
+        )
         // Reset form
         setFormData({
           email: "",
@@ -77,11 +79,12 @@ export default function RegisterPage() {
         throw new Error("Registration failed")
       }
     } catch (error) {
-      toast({
-        title: "Registration failed",
-        description: "Please try again later.",
-        variant: "destructive",
-      })
+      toast(
+        <div>
+          <h1 className="font-bold">Registration failed</h1>
+          <p>Please try again later.</p>
+        </div>
+      )
     } finally {
       setIsLoading(false)
     }

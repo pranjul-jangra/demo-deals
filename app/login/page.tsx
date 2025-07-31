@@ -27,17 +27,20 @@ export default function LoginPage() {
     const success = await login(username, password)
 
     if (success) {
-      toast({
-        title: "Login successful",
-        description: "Welcome back!",
-      })
+      toast(
+        <div>
+          <h1 className="font-bold">Login successful</h1>
+          <p>Welcome back!</p>
+        </div>
+      )
       router.push("/")
     } else {
-      toast({
-        title: "Login failed",
-        description: "Invalid username or password.",
-        variant: "destructive",
-      })
+      toast(
+        <div>
+          <h1 className="font-bold">Login failed</h1>
+          <p>Invalid username or password.</p>
+        </div>
+      )
     }
 
     setIsLoading(false)

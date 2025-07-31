@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useEffect } from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -10,7 +11,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { useCart } from "@/contexts/cart-context"
-import { useAuth } from "@/contexts/auth-context"
 import { useToast } from "@/hooks/use-toast"
 
 export default function CheckoutPage() {
@@ -28,7 +28,6 @@ export default function CheckoutPage() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const { cartItems, getCartTotal, clearCart } = useCart()
-  const { user } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
 
@@ -46,19 +45,22 @@ export default function CheckoutPage() {
     // Simulate order processing
     setTimeout(() => {
       clearCart()
-      toast({
-        title: "Order placed successfully!",
-        description: "Thank you for your purchase. You will receive a confirmation email shortly.",
-      })
+      toast(
+        <div>
+          <h1 className="font-bold">Order placed successfully!</h1>
+          <p>Thank you for your purchase. You will receive a confirmation email shortly.</p>
+        </div>
+      )
       router.push("/order-confirmation")
       setIsLoading(false)
     }, 2000)
   }
 
-  if (cartItems.length === 0) {
-    router.push("/cart")
-    return null
-  }
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      router.push("/cart")
+    }
+  }, [cartItems, router])
 
   const subtotal = getCartTotal()
   const tax = subtotal * 0.1
