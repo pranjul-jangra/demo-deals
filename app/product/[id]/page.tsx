@@ -24,7 +24,7 @@ interface Product {
   }
 }
 
-export default async function ProductPage() {
+export default function ProductPage() {
   const params = useParams();
   const id = params.id as string;
 
@@ -91,7 +91,7 @@ export default async function ProductPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-          <p className="text-muted-foreground">The product you're looking for doesn't exist.</p>
+          <p className="text-muted-foreground">The product you&apos;re looking for doesn&apos;t exist.</p>
         </div>
       </div>
     )

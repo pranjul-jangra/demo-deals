@@ -71,12 +71,12 @@ export default function SearchPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Search Results for "{query}"</h1>
+      <h1 className="text-3xl font-bold mb-8">Search Results for &#34;{query}&#34;</h1>
 
       {products.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-lg text-muted-foreground">
-            No products found for "{query}". Try searching with different keywords.
+            No products found for &#34;{query}&#34;. Try searching with different keywords.
           </p>
         </div>
       ) : (
